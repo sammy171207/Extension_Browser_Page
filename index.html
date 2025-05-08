@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Mentor | Browser Extensions Manager UI</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+
+  <!-- Google Fonts: Noto Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Light Theme Colors */
+      --neutral-900: hsl(227, 75%, 14%);
+      --neutral-800: hsl(226, 25%, 17%);
+      --neutral-700: hsl(225, 23%, 24%);
+      --neutral-600: hsl(226, 11%, 37%);
+      --neutral-300: hsl(0, 0%, 78%);
+      --neutral-200: hsl(217, 61%, 90%);
+      --neutral-100: hsl(0, 0%, 93%);
+      --neutral-0: hsl(200, 60%, 99%);
+      
+      --red-400: hsl(3, 86%, 64%);
+      --red-500: hsl(3, 71%, 56%);
+      --red-700: hsl(3, 77%, 44%);
+      
+      --light-gradient: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+
+      /* Dark Theme Colors (Overridden) */
+      --dark-neutral-900: hsl(0, 0%, 100%);
+      --dark-neutral-800: hsl(0, 0%, 90%);
+      --dark-neutral-700: hsl(0, 0%, 70%);
+      --dark-neutral-600: hsl(0, 0%, 50%);
+      --dark-neutral-300: hsl(0, 0%, 30%);
+      --dark-neutral-200: hsl(0, 0%, 15%);
+      --dark-neutral-100: hsl(0, 0%, 10%);
+      --dark-neutral-0: hsl(0, 0%, 5%);
+      
+      --dark-red-400: hsl(3, 86%, 40%);
+      --dark-red-500: hsl(3, 71%, 45%);
+      --dark-red-700: hsl(3, 77%, 35%);
+      
+      --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 16px;
+      background: var(--light-gradient);
+      color: var(--neutral-900);
+      min-height: 100vh;
+      padding: 2rem;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--neutral-0);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    header button {
+      background-color: var(--neutral-100);
+      border: none;
+      border-radius: 10px;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    header img {
+      height: 32px;
+    }
+
+    main {
+      margin-top: 2rem;
+    }
+
+    .breadcrum {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    }
+
+    .breadcrum h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .button_container > button {
+      background-color: var(--neutral-200);
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .button_container > button:first-child {
+      margin-left: 0;
+    }
+
+    .button_container > button:hover {
+      background-color: var(--neutral-300);
+    }
+
+    .button_container > .active {
+      background-color: var(--red-400);
+      color: white;
+    }
+
+    .grid_layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: var(--neutral-0);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .uppart {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .uppart img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .content h4 {
+      margin-bottom: 0.25rem;
+      font-size: 1.1rem;
+      color: var(--neutral-800);
+    }
+
+    .content p {
+      font-size: 0.9rem;
+      color: var(--neutral-600);
+    }
+
+    .bottompart {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .bottompart button {
+      background-color: var(--red-400);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .bottompart button:hover {
+      background-color: var(--red-500);
+    }
+
+    /* Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--neutral-300);
+      transition: 0.4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    .switch input:checked + .slider {
+      background-color: var(--red-400);
+    }
+
+    .switch input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem;
+      }
+
+      .breadcrum {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .breadcrum h2 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 375px) {
+      body {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="assets/images/logo.svg" alt="Browser Extensions Logo" />
+    <button aria-label="Toggle Dark Mode" id="theme-toggle">
+      <img src="assets/images/icon-moon.svg" alt="Dark mode icon" />
+    </button>
+  </header>
+
+  <main>
+    <div class="breadcrum">
+      <h2>Extensions List</h2>
+      <div class="button_container">
+        <button class="active">All</button>
+        <button>Active</button>
+        <button>Inactive</button>
+      </div>
+    </div>
+
+    <div class="grid_layout">
+      <!-- Card Example -->
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-devlens.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>DevLens</h4>
+            <p>Quickly inspect page layouts and visualize element boundaries.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-style-spy.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>StyleSpy</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-style-spy.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>StyleSpy</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-speed-boost.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>SpeedBoost</h4>
+            <p>Optimizes browser resources usage t accelerate page loading.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-json-wizard.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>JSONWizard</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-tab-master-pro.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>TabMaster Pro</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-viewport-buddy.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>ViewportBuddy</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-markup-notes.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>Markup Notes</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-grid-guides.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>GridGuides</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-palette-picker.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>Palatte Picker</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-link-checker.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>LinkChecker</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="uppart">
+          <img src="assets/images/logo-dom-snapshot.svg" alt="DevLens logo" />
+          <div class="content">
+            <h4>DOM Snapshot</h4>
+            <p>Instantly analyze and copy CSS from any webpage element.</p>
+          </div>
+        </div>
+        <div class="bottompart">
+          <button>Remove</button>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- More cards can go here... -->
+    </div>
+  </main>
+
+  <script>
+    const themeToggleBtn = document.getElementById("theme-toggle");
+
+    themeToggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
+
+      if (document.body.classList.contains("dark-theme")) {
+        themeToggleBtn.innerHTML = '<img src="assets/images/icon-sun.svg" alt="Light mode icon" />';
+        document.documentElement.style.setProperty("--light-gradient", "var(--dark-gradient)");
+        document.documentElement.style.setProperty("--neutral-900", "var(--dark-neutral-900)");
+        document.documentElement.style.setProperty("--neutral-800", "var(--dark-neutral-800)");
+        document.documentElement.style.setProperty("--neutral-700", "var(--dark-neutral-700)");
+        document.documentElement.style.setProperty("--neutral-600", "var(--dark-neutral-600)");
+        document.documentElement.style.setProperty("--neutral-300", "var(--dark-neutral-300)");
+        document.documentElement.style.setProperty("--neutral-200", "var(--dark-neutral-200)");
+        document.documentElement.style.setProperty("--neutral-100", "var(--dark-neutral-100)");
+        document.documentElement.style.setProperty("--neutral-0", "var(--dark-neutral-200)");
+      } else {
+        themeToggleBtn.innerHTML = '<img src="assets/images/icon-moon.svg" alt="Dark mode icon" />';
+        document.documentElement.style.setProperty("--light-gradient", "linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%)");
+        document.documentElement.style.setProperty("--neutral-900", "hsl(227, 75%, 14%)");
+        document.documentElement.style.setProperty("--neutral-800", "hsl(226, 25%, 17%)");
+        document.documentElement.style.setProperty("--neutral-700", "hsl(225, 23%, 24%)");
+        document.documentElement.style.setProperty("--neutral-600", "hsl(226, 11%, 37%)");
+        document.documentElement.style.setProperty("--neutral-300", "hsl(0, 0%, 78%)");
+        document.documentElement.style.setProperty("--neutral-200", "hsl(217, 61%, 90%)");
+        document.documentElement.style.setProperty("--neutral-100", "hsl(0, 0%, 93%)");
+        document.documentElement.style.setProperty("--neutral-0", "hsl(200, 60%, 99%)");
+      }
+    });
+  </script>
+
+</body>
+</html>
